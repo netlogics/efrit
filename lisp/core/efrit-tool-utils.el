@@ -320,7 +320,7 @@ Returns the result of BODY, or a timeout error response if timeout occurs."
 
 (defun efrit-tool-detect-project-type ()
   "Detect the type of project in the current directory.
-Returns a symbol: \\='git, \\='npm, \\='cargo, \\='python, \\='make, or \\='unknown."
+Returns a symbol: \\='git, \\='npm, \\='cargo, \\='python, \\='ruby, \\='rails, \\='make, or \\='unknown."
   (let ((root (efrit-tool--get-project-root)))
     (cond
      ((file-exists-p (expand-file-name ".git" root)) 'git)
@@ -328,6 +328,9 @@ Returns a symbol: \\='git, \\='npm, \\='cargo, \\='python, \\='make, or \\='unkn
      ((file-exists-p (expand-file-name "Cargo.toml" root)) 'cargo)
      ((or (file-exists-p (expand-file-name "setup.py" root))
           (file-exists-p (expand-file-name "pyproject.toml" root))) 'python)
+     ((or (file-exists-p (expand-file-name "Gemfile" root))
+          (file-exists-p (expand-file-name ".ruby-version" root))) 'ruby)
+     ((file-exists-p (expand-file-name "config/application.rb" root)) 'rails)
      ((file-exists-p (expand-file-name "Makefile" root)) 'make)
      (t 'unknown))))
 

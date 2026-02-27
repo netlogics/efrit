@@ -813,6 +813,13 @@ Returns the image as base64-encoded data that Claude can analyze visually."
   :fn efrit-tool-format-file
   :label "Format File Result")
 
+(efrit-define-simple-tool-handler efrit-do--handle-rails "rails"
+  :require efrit-tool-rails
+  :required ("action")
+  :fields ("action" "path")
+  :fn efrit-tool-rails
+  :label "Rails Result")
+
 ;;; Beads issue tracking tools
 
 (defun efrit-do--handle-beads-ready (tool-input)

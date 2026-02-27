@@ -723,6 +723,31 @@ Returns a diff showing formatting changes, or a message if file was already form
                       ("properties" . (("path" . (("type" . "string")
                                                   ("description" . "File path to format (required)")))))
                       ("required" . ["path"]))))
+   (("name" . "rails")
+    ("description" . "Execute Rails/Ruby development commands for Ruby on Rails projects.
+
+ACTIONS:
+- routes: List all application routes. Returns verb, path, and controller#action.
+- migrations: List database migrations with pending/applied status.
+- tests: Discover test files (rspec, minitest) in the project.
+- version: Get Ruby and Rails version information.
+- rubocop: Run rubocop diagnostics on a file or directory.
+- bundle: Run bundle exec commands (tests connection).
+
+EXAMPLES:
+- Get routes: rails action=\"routes\"
+- List migrations: rails action=\"migrations\"
+- Discover tests: rails action=\"tests\"
+- Get versions: rails action=\"version\"
+- Run rubocop: rails action=\"rubocop\" path=\"app/models/user.rb\"
+
+Requires: Ruby project with Gemfile, or Rails project with config/application.rb")
+    ("input_schema" . (("type" . "object")
+                      ("properties" . (("action" . (("type" . "string")
+                                                    ("description" . "Action to perform: routes, migrations, tests, version, rubocop, bundle (required)")))
+                                       ("path" . (("type" . "string")
+                                                  ("description" . "Path for rubocop action (optional, defaults to project root)")))))
+                      ("required" . ["action"]))))
    ;; Beads issue tracking tools
    (("name" . "beads_ready")
     ("description" . "Get ready work (unblocked issues) from beads issue tracker. No blockers, ready to work on immediately. Useful for finding tasks to work on next.")
